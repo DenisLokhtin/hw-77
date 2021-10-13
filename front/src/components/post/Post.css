@@ -8,8 +8,8 @@
 
 .postInfo {
     margin-top: 6px;
-    font-size: 13px;
-    color: grey;
+    font-size: 15px;
+    color: #4b4b4b;
     margin-bottom: 0;
 }
 
@@ -17,4 +17,8 @@
     margin-top: 10px;
     margin-bottom: 10px;
     font-size: 18px;
+}
+.img {
+    max-width: 500px;
+    max-height: 500px;
 }

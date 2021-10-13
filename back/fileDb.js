@@ -10,6 +10,7 @@ module.exports = {
           data = JSON.parse(fileContents);
       } catch (e) {
           data = [];
+          console.log(e)
       }
     },
     save() {

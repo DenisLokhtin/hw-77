@@ -13,6 +13,7 @@ function App() {
     const textMessage = useSelector(state => state.textMessage);
     const authorMessage = useSelector(state => state.authorMessage);
     const posts = useSelector(state => state.posts);
+    const image = useSelector(state => state.image);
 
     let interval = null;
 
@@ -45,6 +46,7 @@ function App() {
                 const data = {
                     "message": textMessage,
                     "author": 'Anonymous',
+                    "image": image,
                 };
                 await axios.post(url, data);
                 dispatch(textChange(''));
@@ -53,6 +55,7 @@ function App() {
                 const data = {
                     "message": textMessage,
                     "author": authorMessage,
+                    "image": image,
                 };
                 await axios.post(url, data);
                 dispatch(textChange(''));
