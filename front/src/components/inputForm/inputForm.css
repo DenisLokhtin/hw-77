@@ -1,0 +1,39 @@
+.forms {
+    margin: 10px;
+}
+
+.authorForm {
+    border-radius: 3px;
+    border: 2px solid black;
+    height: 25px;
+    width: 150px;
+    margin-right: 10px;
+    padding-left: 5px;
+}
+
+.textForm {
+    border-radius: 3px;
+    border: 2px solid black;
+    height: 25px;
+    width: 300px;
+    margin-right: 10px;
+    padding-left: 5px;
+}
+
+.sendBtn {
+    border-radius: 3px;
+    border: 2px solid black;
+    background: white;
+    height: 31px;
+    width: 150px;
+    cursor: pointer;
+    transition: 100ms;
+}
+
+.sendBtn:hover {
+    transform: scale(1.1);
+}
+
+.sendBtn:active {
+    transform: scale(0.9);
+}
