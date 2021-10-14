@@ -3,17 +3,18 @@ import InputForm from "./components/inputForm/inputForm";
 import Post from "./components/post/Post";
 import axios from "axios";
 import {useDispatch, useSelector} from "react-redux";
-import {authorChange, postsSet, textChange} from "./store/action";
+import {authorChange, postsSet, textChange, imageSet} from "./store/action";
 import './App.css';
 
 function App() {
     const url = 'http://localhost:8000/message';
 
     const dispatch = useDispatch();
-    const textMessage = useSelector(state => state.textMessage);
-    const authorMessage = useSelector(state => state.authorMessage);
+    const message = useSelector(state => state.post.message);
+    const author = useSelector(state => state.post.author);
     const posts = useSelector(state => state.posts);
     const image = useSelector(state => state.image);
+    const post = useSelector(state => state.post);
 
     let interval = null;
 
@@ -40,21 +41,25 @@ function App() {
         }, 2000);
     }, [posts]);
 
+    const imageChangeHandler = e => {
+        const name = e.target.name;
+        const file = e.target.files[0];
+        dispatch(imageSet(file, name));
+    };
+
     const addPost = async (event) => {
         try {
-            if (authorMessage === '') {
+            if (author === '') {
                 const data = {
-                    "message": textMessage,
-                    "author": 'Anonymous',
-                    "image": image,
+                    ...post
                 };
                 await axios.post(url, data);
                 dispatch(textChange(''));
                 return
             } else {
                 const data = {
-                    "message": textMessage,
-                    "author": authorMessage,
+                    "message": message,
+                    "author": author,
                     "image": image,
                 };
                 await axios.post(url, data);
@@ -74,8 +79,9 @@ function App() {
                     setText={(value) => dispatch(textChange(value))}
                     setAuthor={(value) => dispatch(authorChange(value))}
                     add={() => addPost()}
-                    text={textMessage}
-                    author={authorMessage}
+                    text={message}
+                    author={author}
+                    setImage={imageChangeHandler}
                 />
                 <div className="posts">
                     {posts.map((post, index) => {

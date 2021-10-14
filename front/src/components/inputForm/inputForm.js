@@ -21,6 +21,7 @@ const InputForm = (props) => (
         <input
             className="fileForm"
             type="file"
+            onChange={props.setImage}
         />
         <button onClick={props.add} className="sendBtn">Send</button>
     </div>

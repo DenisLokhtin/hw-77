@@ -1,23 +1,24 @@
-import {AUTHOR_CHANGE, TEXT_CHANGE, POSTS_SET} from "./action";
+import {AUTHOR_CHANGE, TEXT_CHANGE, POSTS_SET, IMAGE_SET} from "./action";
 
 const initialState = {
-    authorMessage: '',
-    textMessage: '',
     posts: [],
-    image: '',
+    post: {author: '', message: '', file: null, filename: '',},
 };
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case AUTHOR_CHANGE:
-            return {...state, authorMessage: action.payload};
+            return {...state, post: {...state.post, author: action.payload}};
         case TEXT_CHANGE:
-            return {...state, textMessage: action.payload};
+            return {...state, post: {...state.post, message: action.payload}};
         case POSTS_SET:
             return {
                 ...state,
                 posts: [...state.posts, ...action.payload]
             };
+        case IMAGE_SET:
+            return {...state, post: {...state.post, filename: action.payload.name, file: action.payload.file}};
+
 
         default:
             return state;
@@ -25,4 +26,4 @@ const reducer = (state = initialState, action) => {
 }
 
 
-export default reducer;
+    export default reducer;
