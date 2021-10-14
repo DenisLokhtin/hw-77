@@ -40,7 +40,7 @@ router.post('/', upload.single('file'), (req, res) => {
         const body = {
             author: req.body.author,
             message: req.body.message,
-            dateTime: currentDate,
+            datetime: currentDate,
             id: ID,
         };
 
