@@ -33,7 +33,7 @@ router.get('/', (req, res) => {
     }
 });
 
-router.post('/', upload.single('image'), (req, res) => {
+router.post('/', upload.single('file'), (req, res) => {
     if (req.body.message !== '') {
         const currentDate = new Date();
 
@@ -44,11 +44,9 @@ router.post('/', upload.single('image'), (req, res) => {
             id: ID,
         };
 
-        if (req.body.image) {
-            body.image = req.body.image;
+        if (req.file) {
+            body.file = req.file.filename;
         }
-
-        console.log(body)
 
         fileDB.addItem(body);
         res.setHeader('content-type', 'application/JSON');

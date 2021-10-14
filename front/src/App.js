@@ -44,27 +44,23 @@ function App() {
     const imageChangeHandler = e => {
         const name = e.target.name;
         const file = e.target.files[0];
-        dispatch(imageSet(file, name));
+        dispatch(imageSet(name, file));
     };
 
     const addPost = async (event) => {
         try {
-            if (author === '') {
-                const data = {
-                    ...post
-                };
-                await axios.post(url, data);
-                dispatch(textChange(''));
-                return
-            } else {
-                const data = {
-                    "message": message,
-                    "author": author,
-                    "image": image,
-                };
-                await axios.post(url, data);
-                dispatch(textChange(''));
+            const data = {
+                ...post
             };
+            if (author === '') {
+                data.author = 'Anonymous'
+            }
+            const formData = new FormData();
+            Object.keys(data).forEach(key => {
+                formData.append(key, data[key]);
+            });
+            await axios.post(url, formData);
+            dispatch(textChange(''));
         } catch (e) {
             console.log(e.response.data);
             alert(e.response.data.error);
@@ -91,6 +87,7 @@ function App() {
                                 author={post.author}
                                 date={post.datetime}
                                 text={post.message}
+                                file={post.file}
                             />
                         )
                     })}
